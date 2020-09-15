@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li><a href="{:url('admin/prize/index')}" class="a_menu">奖品管理</a></li>
+        <li class="layui-this">新增奖品</li>
+      </ul>
+    </div>
+    <div style="margin-top: 20px;">
+    </div>
+    <form class="layui-form" id="admin">
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">奖品类型</label>
+        <div class="layui-input-inline">
+          <select name="cate" lay-filter="shop">
+            <option value="" >点击选择</option>
+            <option value="1" {notempty name="$info.cate"}{eq name="$info.cate" value="1" } selected {/eq}{/notempty}>道具商店</option>
+            <option value="2" {notempty name="$info.cate"}{eq name="$info.cate" value="2" } selected {/eq}{/notempty}>动物商店</option>
+            <option value="3" {notempty name="$info.cate"}{eq name="$info.cate" value="3" } selected {/eq}{/notempty}>自定义</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item zoonlevel {empty name='$info.zoon_id'}layui-hide{/empty}">
+        <label class="layui-form-label">动物级别</label>
+        <div class="layui-input-inline">
+          <select name="zoon_id" lay-filter="zoon">
+            <option value="" >点击选择</option>
+            {volist name= "$zoon" id="vo"}
+            <option value="{$vo.id}" {notempty name="$info.zoon_id"}{eq name="$info.zoon_id" value="$vo.id" } selected="" {/eq}{/notempty}>{$vo.zoonlevel}级</option>
+            {/volist}
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item zoonname  {empty name='$info.zoon_name'}layui-hide{/empty}">
+        <label class="layui-form-label">动物名称</label>
+        <div class="layui-input-inline">
+          <input autocomplete="off" class="layui-input zoon_name" type="text" {notempty name="$info.zoon_name"} value="{$info.zoon_name}"{/notempty}>
+        </div>
+      </div>
+
+      <div class="layui-form-item {empty name='$info.itemshop_id'}layui-hide{/empty} itemshop">
+        <label class="layui-form-label">道具名称</label>
+        <div class="layui-input-inline">
+          <select name="itemshop_id" lay-filter="aihao">
+            <option value="" >点击选择</option>
+            {volist name= "$item" id="vo"}
+            <option value="{$vo.id}" {notempty name="$info.itemshop_id"} {eq name="$info.itemshop_id" value="$vo.id" } selected="" {/eq}{/notempty}>{$vo.name}</option>
+            {/volist}
+          </select>
+        </div>
+      </div>
+      <div class="layui-form-item zidingyi {empty name='$info.custom'} layui-hide {/empty}">
+        <label class="layui-form-label">自定义</label>
+        <div class="layui-input-inline">
+          <input name="custom"  autocomplete="off" class="layui-input" type="text" {notempty name="$info.custom"}value="{$info.custom}"{/notempty}>
+        </div>
+      </div>
+
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">奖品数量</label>
+        <div class="layui-input-inline">
+          <input name="num" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.num"}value="{$info.num}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">中奖概率</label>
+        <div class="layui-input-inline" style="max-width: 82px;">
+          <input name="chance1" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.chance1"}value="{$info.chance1}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">|</div>
+        <div class="layui-input-inline" style="max-width: 82px;">
+          <input name="chance2" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.chance2"}value="{$info.chance2}"{/notempty}>
+        </div>
+      </div>      
+      <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-form-mid" style="color: red;">*注：中奖概率前者为中奖数量，后者为累计抽奖次数</div>
+      </div>
+
+
+
+  
+      {notempty name="$info.id"}
+      <input type="hidden" name="id" value="{$info.id}">
+      {/notempty}
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+      
+    </form>
+
+
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script>
+    <script>
+    layui.use('upload', function(){
+      var upload = layui.upload;
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#thumb' //绑定元素
+        ,url: "{:url('common/upload')}" //上传接口
+        ,data:{use:'info_thumb'}
+        ,done: function(res){
+          //上传完毕回调
+          if(res.code == 2) {
+            $('#demo1').attr('src',res.src);
+            $('#upload-thumb').append('<input type="hidden" name="thumb" value="'+ res.src +'">');
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+        ,error: function(){
+          //请求异常回调
+          //演示失败状态，并实现重传
+          var demoText = $('#demoText');
+          demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+          demoText.find('.demo-reload').on('click', function(){
+            uploadInst.upload();
+          });
+        }
+      });
+    });
+    </script>
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/prize/publish')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+
+          //奖品类型
+          form.on('select(shop)', function(data){
+            console.log(data.value);
+              if (data.value == 1) {
+                $(".zoonlevel").addClass("layui-hide");
+                $(".zoonname").addClass("layui-hide");
+                $(".itemshop").removeClass("layui-hide");
+                $(".zidingyi").addClass("layui-hide");
+              } else if (data.value == 2) {
+                $(".zoonlevel").removeClass("layui-hide");
+                $(".zoonname").removeClass("layui-hide");
+                $(".itemshop").addClass("layui-hide");
+                $(".zidingyi").addClass("layui-hide");
+              } else if (data.value == 3) {
+                $(".zoonlevel").addClass("layui-hide");
+                $(".zoonname").addClass("layui-hide");
+                $(".itemshop").addClass("layui-hide");
+                $(".zidingyi").removeClass("layui-hide");
+              } else {
+                $(".zoonlevel").addClass("layui-hide");
+                $(".zoonname").addClass("layui-hide");
+                $(".itemshop").addClass("layui-hide");
+                $(".zidingyi").addClass("layui-hide");
+              }
+          });
+          // 获取动物名称
+          form.on('select(zoon)', function(data){
+            console.log(data.value);
+              if (data.value == '') {
+                $(".zoon_name").val("");
+              } else {
+                $.ajax({
+                    url:"{:url('admin/Prize/getzoonname')}",
+                    data:{id:data.value},
+                    type:'post',
+                    async: false,
+                    success:function(res) {
+                      console.log(res);
+                       $(".zoon_name").val(res);
+                    }
+                })
+              }
+          });
+      });
+    </script>
+<script>
+    layui.use(['layer', 'jquery', 'form'], function () {
+      var layer = layui.layer,
+              $ = layui.jquery;
+            form = layui.form;
+
+      form.on('select(demo)', function(data){
+        console.log(data.value);
+        if (data.value == '') {
+          $(".zoonname").children("input").val("");
+        } else {
+          $.ajax({
+              url:"{:url('admin/Prize/getzoonname')}",
+              data:{id:data.value},
+              type:'post',
+              async: false,
+              success:function(res) {
+                 $(".zoonname").children("input").val(res);
+              }
+          })
+        }
+      });
+    });
+</script>
+  </div>
+</body>
+</html>

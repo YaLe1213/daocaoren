@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px;width: 500px;">
+  <div class="tplay-body-div">
+    <form class="layui-form" id="admin">
+      <br>
+      <h1>注册验证</h1>
+      <br>
+      <blockquote class="layui-elem-quote">注册验证码</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="register_code" autocomplete="off" class="layui-input" type="text" value="{$info.register_code}">
+        </div>
+      </div>
+      <blockquote class="layui-elem-quote">修改登录密码</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="eidt_pass_code" autocomplete="off" class="layui-input" type="text" value="{$info.eidt_pass_code}">
+        </div>
+      </div>
+      <blockquote class="layui-elem-quote">找回登录密码</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="retrieve_code" autocomplete="off" class="layui-input" type="text" value="{$info.retrieve_code}">
+        </div>
+      </div>
+      <blockquote class="layui-elem-quote">修改安全密码</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="edit_safe_code" autocomplete="off" class="layui-input" type="text" value="{$info.edit_safe_code}">
+        </div>
+      </div>
+      
+      <br>
+      <h1>注册验证</h1>
+      <br>
+
+      <blockquote class="layui-elem-quote">交易市场买家发布求购订单通知</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="release_buy" autocomplete="off" class="layui-input" type="text" value="{$info.release_buy}">
+        </div>
+      </div>
+      <blockquote class="layui-elem-quote">交易市场买家取消求购订单通知</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="cancel_buy" autocomplete="off" class="layui-input" type="text" value="{$info.cancel_buy}">
+        </div>
+      </div>
+      <blockquote class="layui-elem-quote">交易市场卖家提交求购订单通知</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="sub_buy" autocomplete="off" class="layui-input" type="text" value="{$info.sub_buy}">
+        </div>
+      </div>
+      <blockquote class="layui-elem-quote">交易市场买家确认打款订单通知</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="confirm_payment" autocomplete="off" class="layui-input" type="text" value="{$info.confirm_payment}">
+        </div>
+      </div>
+      <blockquote class="layui-elem-quote">交易市场卖家确认求购订单通知</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="confirm_buy" autocomplete="off" class="layui-input" type="text" value="{$info.confirm_buy}">
+        </div>
+      </div>
+      <blockquote class="layui-elem-quote">交易大厅买卖双方订单发起投诉通知</blockquote>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">模板ID</div>
+        <div class="layui-input-inline">
+          <input name="complaint_code" autocomplete="off" class="layui-input" type="text" value="{$info.complaint_code}">
+        </div>
+      </div>
+
+
+      <br>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">确认保存</button>
+        </div>
+      </div>
+        
+    </form>
+    {include file="public/foot"}
+    
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/system/zhihuan')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+          form.on('select(zoon)', function(data){
+            console.log(data.value);
+              $.ajax({
+                  url:"{:url('admin/system/getzoon')}",
+                  data:{id:data.value},
+                  type:'post',
+                  async: false,
+                  success:function(res) {
+                     console.log(res);
+                     $(".zoon_name").val(res);
+                  }
+              })
+          });
+      });
+    </script>
+    <script>
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      laydate.render({ 
+        elem: '#fh_time'
+        ,type: 'time'
+      });
+    });
+    </script>
+  </div>
+</body>
+</html>

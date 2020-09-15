@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="wphonetphoneidth, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+</head>
+<body style="padding:10px;max-width: 12200px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">交易参照</li>
+      </ul>
+    </div>
+    <div style="margin-top: 20px;">
+    </div>
+    <form class="layui-form" id="admin">
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">交易功能开始时间段</div>
+        <div class="layui-input-inline">
+          <input name="start_time" autocomplete="off" class="layui-input" type="text" value="{$info.start_time}" id="start_time">
+        </div>
+        <div class="layui-form-mid layui-word-aux">至</div>
+        <div class="layui-input-inline">
+          <input name="end_time" autocomplete="off" class="layui-input" type="text" value="{$info.end_time}" id="end_time">
+        </div>
+        <div class="layui-form-mid" style="color: red;">*注：时间为固定时间段，其他时间段为关闭状态，前端提示框显示：交易关闭/求购中心为每日早9:00:00开启-晚21:00:00结束！</div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">初始信誉分</div>
+        <div class="layui-input-inline">
+          <input name="first_credit" autocomplete="off" class="layui-input" type="text" value="{$info.first_credit}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">分</div>
+      </div>
+
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">信誉分上限</div>
+        <div class="layui-input-inline">
+          <select name="credit_top" lay-filter="demo">
+            
+            <option value="0" {eq name="$info.credit_top" value="0"} selected=""{/eq}>无上限</option>
+            <option value="200" {eq name="$info.credit_top" value="200"} selected=""{/eq}>200分</option>
+            <option value="300" {eq name="$info.credit_top" value="300"} selected=""{/eq}>300分</option>
+            <option value="400" {eq name="$info.credit_top" value="400"} selected=""{/eq}>400分</option>
+            <option value="500" {eq name="$info.credit_top" value="500"} selected=""{/eq}>500分</option>
+            <option value="600" {eq name="$info.credit_top" value="600"} selected=""{/eq}>600分</option>
+            <option value="700" {eq name="$info.credit_top" value="700"} selected=""{/eq}>700分</option>
+            <option value="800" {eq name="$info.credit_top" value="800"} selected=""{/eq}>800分</option>
+            <option value="900" {eq name="$info.credit_top" value="900"} selected=""{/eq}>900分</option>
+            <option value="1000" {eq name="$info.credit_top" value="1000"} selected=""{/eq}>1000分</option>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">信誉分低于</div>
+        <div class="layui-input-inline">
+          <select name="credit_bot" lay-filter="demo">
+            
+            <option value="50" {eq name="$info.credit_bot" value="50"} selected=""{/eq}>≤50</option>
+            <option value="40" {eq name="$info.credit_bot" value="40"} selected=""{/eq}>≤40</option>
+            <option value="30" {eq name="$info.credit_bot" value="30"} selected=""{/eq}>≤30</option>
+            <option value="20" {eq name="$info.credit_bot" value="20"} selected=""{/eq}>≤20</option>
+            <option value="10" {eq name="$info.credit_bot" value="10"} selected=""{/eq}>≤10</option>
+
+          </select>
+        </div>
+        <div class="layui-form-mid layui-word-aux">分时，给予会员账号</div>
+        <div class="layui-input-inline">
+          <select name="users_limit" lay-filter="demo">
+            
+            <option value="operation_limit" {eq name="$info.users_limit" value="operation_limit"} selected=""{/eq}>操作限制</option>
+            <option value="login_limit" {eq name="$info.users_limit" value="login_limit"} selected=""{/eq}>登录限制</option>
+
+          </select>
+        </div>
+        <div class="layui-form-mid layui-word-aux">，自动限制时间为</div>
+        <div class="layui-input-inline">
+          <input name="limit_time" autocomplete="off" class="layui-input" type="text" value="{$info.limit_time}" placeholder="点击选择日期" id="limit_time" >
+        </div>
+        <div class="layui-form-mid layui-word-aux">，自动显示原因为</div>
+        <div class="layui-input-inline">
+          <input name="limit_cause" autocomplete="off" class="layui-input" type="text" value="{$info.limit_cause}" >
+        </div>
+      </div>
+
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">买方发布交易订单，此时订单状态为<span style="color: blue;">[求购中]</span>，有效时长为</div>
+        <div class="layui-input-inline">
+          <input name="want_buying" autocomplete="off" class="layui-input" type="text" value="{$info.want_buying}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">天</div>
+        <div class="layui-form-mid layui-word-aux">，如买方手动取消求购订单，自动扣除买方信誉分</div>
+        <div class="layui-input-inline">
+          <input name="no_cancel_buying" autocomplete="off" class="layui-input" type="text" value="{$info.no_cancel_buying}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">分</div>
+        <div class="layui-form-mid" style="color: red;">*注：超出时间未有卖方点击订单进行交易，视为当前订单自动取消不扣信誉分</div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">卖方确认交易订单，此时订单状态为<span style="color: blue;">[打款中]</span>，有效时长为</div>
+        <div class="layui-input-inline">
+          <input name="buyed_time" autocomplete="off" class="layui-input" type="text" value="{$info.buyed_time}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">分钟</div>
+        <div class="layui-form-mid layui-word-aux">，如买方超过有效时长未打款订单，自动扣除买方信誉分</div>
+        <div class="layui-input-inline">
+          <input name="no_buyed" autocomplete="off" class="layui-input" type="text" value="{$info.no_buyed}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">分</div>
+        <div class="layui-form-mid" style="color: red;">，并且此订单状态重新变更为<span style="color: blue;">[求购中]</span></div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid" style="color: red;">*注：订单状态为<span style="color: blue;">[打款中]</span>，自动冻结当前交易订单卖家的HOS数量，剩余HOS数量不受影响！并且提交订单操作时弹出提示框显示：提交订单/提交订单会冻结交易的HOS额度！是否确认提交吗？</div>
+      </div>
+
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">买方提交支付之后，此时订单状态为<span style="color: blue;">[待确定]</span>，有效时长为</div>
+        <div class="layui-input-inline">
+          <input name="no_confirm_time" autocomplete="off" class="layui-input" type="text" value="{$info.no_confirm_time}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">分钟</div>
+        <div class="layui-form-mid layui-word-aux">，如卖方超过有效时长未确认收款，自动扣除卖方信誉分</div>
+        <div class="layui-input-inline">
+          <input name="no_confirm_pay" autocomplete="off" class="layui-input" type="text" value="{$info.no_confirm_pay}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">分</div>
+        <div class="layui-form-mid layui-word-aux">，并且此订单状态自动变更为<span style="color: blue;">[已完成]</span></div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">，如卖方在有效时长内确认收款，自动增加卖方信誉分</div>
+        <div class="layui-input-inline">
+          <input name="no_confirm_time" autocomplete="off" class="layui-input" type="text" value="{$info.no_confirm_time}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">分</div>
+        <div class="layui-form-mid layui-word-aux">，并且自动增加买方信誉分</div>
+        <div class="layui-input-inline">
+          <input name="inc_buy_credit" autocomplete="off" class="layui-input" type="text" value="{$info.inc_buy_credit}">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">如卖家发现买家所上传的打款截图为虚假或延迟到账原因，卖家可点击 <span style="color: red;">[发起投诉]</span>按钮，此时订单自动变更状态为 <span style="color: blue;">[待处理]</span>！不扣除卖方信誉分，由后台客服人员在[系统日志][交易列表]中去处理，并且此时订单的有效时间自动清零，由后台人工处理时长不限制</div>
+        <div class="layui-form-mid layui-word-aux">A.如后台人工客服给予处理结果为： <span style="color: red;">[确认收款]</span>，订单自动变更状态为： <span style="color: blue;">[已完成]</span>，此时交易强制完成！订单关闭！</div>
+        <div class="layui-form-mid layui-word-aux">B.如后台人工客服给予处理结果为： <span style="color: red;">[取消订单]</span>，订单自动变更状态为： <span style="color: blue;">[取消订单]</span>， 此时交易强制取消！订单关闭！人工客服属于强制取消订单不扣除买家信誉分！</div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">卖方确定交易订单，此时订单状态为 <span style="color: blue;">[已完成]</span>，此时交易所得到的HOS数量自动增加到买方HOS账户中，交易中卖方冻结的HOS额度也会减少，至此订单结束！</div>
+      </div>
+
+      <blockquote class="layui-elem-quote">发布求购参数</blockquote>
+      
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">买方发布交易订单，根据不同会员级别，每天限制 <span style="color: red;">发布求购订单的次数</span>，条件可在<span style="color: blue;">[会员管理]</span>-<span style="color: blue;">[会员级别]</span>-<span style="color: blue;">[每天限制求购]</span>中设置</div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">买方发布交易订单，根据不同会员级别，每次限制 <span style="color: red;">发布求购订单的产量</span>，条件可在<span style="color: blue;">[会员管理]</span>-<span style="color: blue;">[会员级别]</span>-<span style="color: blue;">[每次求购产量]</span>中设置</div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">卖方提交交易订单，根据不同会员级别，每天限制 <span style="color: red;">交易求购订单的次数</span>，条件可在<span style="color: blue;">[会员管理]</span>-<span style="color: blue;">[会员级别]</span>-<span style="color: blue;">[每天限制卖出]</span>中设置</div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">卖方提交交易订单，根据不同会员级别，每天限制 <span style="color: red;">累计求购订单的产量</span>，条件可在 <span style="color: blue;">[会员管理]</span>-<span style="color: blue;">[会员级别]</span>-<span style="color: blue;">[每天累计卖出]</span>中设置</div>
+      </div>
+
+
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">确认保存</button>
+        </div>
+      </div>
+      
+    </form>
+
+
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script>
+    <script>
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      // 会员限制时间
+      laydate.render({ 
+        elem: '#limit_time'
+        ,type: 'date'
+      });
+      laydate.render({ 
+        elem: '#start_time'
+        ,type: 'time'
+      });
+      laydate.render({ 
+        elem: '#end_time'
+        ,type: 'time'
+      });
+    });
+    </script>
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/deal/index')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+    </script>
+
+  </div>
+</body>
+</html>

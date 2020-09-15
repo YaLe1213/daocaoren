@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li><a href="{:url('admin/userslevel/index')}" class="a_menu">会员级别</a></li>
+        <li class="layui-this">新增级别</li>
+      </ul>
+    </div>
+    <div style="margin-top: 20px;">
+    </div>
+    <form class="layui-form" id="admin">
+      <div class="layui-form-item">
+        <label class="layui-form-label">级别名称</label>
+        <div class="layui-input-inline">
+          <input name="name" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.name"}value="{$info.name}"{/notempty}>
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">共识度</label>
+        <div class="layui-input-inline">
+          <input name="consensus" autocomplete="off" class="layui-input" type="text" {notempty name="$info.consensus"}value="{$info.consensus}"{/notempty}>
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">全网分红</label>
+        <div class="layui-input-inline">
+          <input name="bonus" autocomplete="off" class="layui-input" type="text" {notempty name="$info.bonus"}value="{$info.bonus}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">置换手续费</label>
+        <div class="layui-input-inline">
+          <input name="change_service" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.change_service"}value="{$info.change_service}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">转让手续费</label>
+        <div class="layui-input-inline">
+          <input name="transfer_service" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.transfer_service"}value="{$info.transfer_service}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">升级赠送动物</label>
+        <div class="layui-input-inline">
+          <select name="upgrade_give[]" lay-filter="demo"  id="upgrade_give1">
+            <option value="" data-name="">点击选择动物级别</option>
+            <option value="0" data-name="" {notempty name="$info.upgrade_give.0"}{eq name="$info.upgrade_give.0" value="0"} selected=""{/eq}{/notempty} >不赠送</option>
+            {volist name="zoon" id="vo"}
+            <option value="{$vo.id}" data-name="{$vo.name}" {notempty name="$info.upgrade_give.0"}{eq name="$info.upgrade_give.0" value="$vo.id"} selected=""{/eq}{/notempty}>{$vo.zoonlevel}级</option>
+            {/volist}
+          </select>
+        </div>
+        <div class="layui-input-inline">
+          <input name="upgrade_give[]" autocomplete="off" class="layui-input give_name" type="text" {notempty name="$info.upgrade_give.1"}value="{$info.upgrade_give.1}"{/notempty}>
+        </div>
+        <div class="layui-input-inline">
+          <input name="upgrade_give[]" autocomplete="off" class="layui-input" type="text" {notempty name="$info.upgrade_give.2"}value="{$info.upgrade_give.2}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">只</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">解除操作产量</label>
+        <div class="layui-input-inline">
+          <input name="relieve_operation_yield" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.relieve_operation_yield"}value="{$info.relieve_operation_yield}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">每天限制求购</label>
+        <div class="layui-input-inline">
+          <input name="limit_wantbuy" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.limit_wantbuy"}value="{$info.limit_wantbuy}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">次</div>
+      </div>
+
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">每次求购产量</label>
+        <div class="layui-input-inline">
+          <input name="wantbuy_yield[]" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.wantbuy_yield.0"}value="{$info.wantbuy_yield.0}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <div class="layui-form-mid layui-word-aux">≥X≤</div>
+        <div class="layui-input-inline">
+          <input name="wantbuy_yield[]" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.wantbuy_yield.1"}value="{$info.wantbuy_yield.1}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">每天限制卖出</label>
+        <div class="layui-input-inline">
+          <input name="limit_sell_out" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.limit_sell_out"}value="{$info.limit_sell_out}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">次</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">每天累计卖出≤</label>
+        <div class="layui-input-inline">
+          <input name="cumulative_sell_out" lay-verify="required" autocomplete="off" class="layui-input" type="text" {notempty name="$info.cumulative_sell_out"}value="{$info.cumulative_sell_out}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">直推总人数≥</label>
+        <div class="layui-input-inline">
+          <input name="push[]" autocomplete="off" class="layui-input" type="text" {notempty name="$info.push.0"}value="{$info.push.0}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">人</div>
+        <div class="layui-form-mid layui-word-aux">并且满足直推≥</div>
+        <div class="layui-input-inline">
+          <input name="push[]" autocomplete="off" class="layui-input" type="text" {notempty name="$info.push.1"}value="{$info.push.1}"{/notempty}>
+        </div>
+        <div class="layui-form-mid layui-word-aux">人</div>
+        <div class="layui-input-inline">
+          <select name="push[]" lay-filter="aihao">
+            <option value="" >点击选择会员级别</option>
+            <option value="0" {notempty name="$info.push.2"}{eq name="$info.push.2" value="未实名"} selected=""{/eq}{/notempty}>不限制</option>
+            {volist name="userslevel" id="v"}
+            <option value="{$v.id}" {notempty name="$info.push.2"}{eq name="$info.push.2" value="$v.id"} selected=""{/eq}{/notempty}>{$v.name}</option>
+            {/volist}
+          </select>
+        </div>
+      </div>
+
+      {notempty name="$info.id"}
+      <input type="hidden" name="id" value="{$info.id}">
+      {/notempty}
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+      
+    </form>
+
+
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script>
+
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/userslevel/publish')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+    </script>
+    <script>
+    layui.use(['layer', 'jquery', 'form'], function () {
+      var layer = layui.layer,
+              $ = layui.jquery;
+            form = layui.form;
+
+      form.on('select(demo)', function(data){
+        console.log(data.value);
+        if (data.value == '' || data.value == 0) {
+          $(".give_name").val("");
+        } else {
+          $.ajax({
+            url:"{:url('admin/userslevel/getname')}",
+            data:{id:data.value},
+            type:'post',
+            success:function(res) {
+                $(".give_name").val(res);
+            }
+          })
+        }
+      });
+    });
+    </script>
+  </div>
+</body>
+</html>

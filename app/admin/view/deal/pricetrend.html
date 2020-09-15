@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px; width: 1600px;">
+  <div class="tplay-body-div">
+     <form class="layui-form" id="admin">
+   
+    <table class="layui-table" lay-size="sm">
+      <caption><h2>今天时间：{$time}&nbsp&nbsp&nbsp&nbsp请填写明天的固定价格走势</h2></caption>
+      <colgroup>
+        <col width="60">  
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+        <col width="120">
+      </colgroup>
+        <thead>
+          <tr>
+            <th>时间段</th>
+            <th>9:00:00-10:00:00</th>
+            <th>10:00:00-11:00:00</th>
+            <th>11:00:00-12:00:00</th>
+            <th>12:00:00-13:00:00</th>
+            <th>13:00:00-14:00:00</th>
+            <th>14:00:00-15:00:00</th>
+            <th>15:00:00-16:00:00</th>
+            <th>16:00:00-17:00:00</th>
+            <th>17:00:00-18:00:00</th>
+            <th>18:00:00-19:00:00</th>
+            <th>19:00:00-20:00:00</th>
+            <th>20:00:00-21:00:00</th>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr>
+            <td>价格</td>
+            <td><input style="width: 90px;" name="time1" type="text" value="{$info.time1}"></td>
+            <td><input style="width: 90px;" name="time2" type="text" value="{$info.time2}"></td>
+            <td><input style="width: 90px;" name="time3" type="text" value="{$info.time3}"></td>
+            <td><input style="width: 90px;" name="time4" type="text" value="{$info.time4}"></td>
+            <td><input style="width: 90px;" name="time5" type="text" value="{$info.time5}"></td>
+            <td><input style="width: 90px;" name="time6" type="text" value="{$info.time6}"></td>
+            <td><input style="width: 90px;" name="time7" type="text" value="{$info.time7}"></td>
+            <td><input style="width: 90px;" name="time8" type="text" value="{$info.time8}"></td>
+            <td><input style="width: 90px;" name="time9" type="text" value="{$info.time9}"></td>
+            <td><input style="width: 90px;" name="time10" type="text" value="{$info.time10}"></td>
+            <td><input style="width: 90px;" name="time11" type="text" value="{$info.time11}"></td>
+            <td><input style="width: 90px;" name="time12" type="text" value="{$info.time12}"></td>
+          </tr>
+        </tbody>
+    </table>
+    <br>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="admin">确认保存</button>
+    </div>
+  </div>
+  
+</form>
+    {include file="public/foot"}
+    
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/deal/pricetrend')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+    </script>
+  </div>
+</body>
+</html>

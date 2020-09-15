@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px; width: 1600px;">
+  <div class="tplay-body-div">
+    <form class="layui-form" id="admin">
+
+      <blockquote class="layui-elem-quote">会员注册参数</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">每日限制会员注册总人数</div>
+        <div class="layui-input-inline">
+          <input name="limit_register" autocomplete="off" class="layui-input" type="text" value="{$info.limit_register}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">人</div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">如果超出限制则APP注册提示框显示：</div>
+        <div class="layui-input-inline" style="width: 500px;">
+          <input name="limit_tips" autocomplete="off" class="layui-input" type="text" value="{$info.limit_tips}">
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">每日开放会员注册时间段</div>
+        <div class="layui-input-inline">
+          <input name="regist_start" autocomplete="off" class="layui-input" type="text" value="{$info.regist_start}" id="regist_start">
+        </div>
+        <div class="layui-form-mid layui-word-aux">至</div>
+        <div class="layui-input-inline">
+          <input name="regist_end" autocomplete="off" class="layui-input" type="text" value="{$info.regist_end}" id="regist_end">
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">如果超出时间段则APP注册提示框显示：</div>
+        <div class="layui-input-inline"  style="width: 500px;">
+          <input name="over_time_tips" autocomplete="off" class="layui-input" type="text" value="{$info.over_time_tips}">
+        </div>
+      </div>
+
+
+      <blockquote class="layui-elem-quote">H5在线客服</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">在线客服跳转地址</div>
+        <div class="layui-input-inline" style="width: 500px;">
+          <input name="service_url" autocomplete="off" class="layui-input" type="text" value="{$info.service_url}">
+        </div>
+      </div>
+
+      <blockquote class="layui-elem-quote">喂养参数</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">一只动物每天可喂养</div>
+        <div class="layui-input-inline">
+          <input name="zoon_feed" autocomplete="off" class="layui-input" type="text" value="{$info.zoon_feed}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">次</div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">喂养倒计时多久可以收获产量</div>
+        <div class="layui-input-inline">
+          <input name="feed_time" autocomplete="off" class="layui-input" type="text" value="{$info.feed_time}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">小时</div>
+      </div>
+
+      <blockquote class="layui-elem-quote">互动参数</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">偷取产量的前端好友层级显示</div>
+        <div class="layui-input-inline">
+          <select name="show_level" lay-filter="demo">
+            
+            <option value="0" {eq name="$info.show_level" value="0"} selected=""{/eq}>不限</option>
+            <option value="10" {eq name="$info.show_level" value="10"} selected=""{/eq}>10级</option>
+            <option value="20" {eq name="$info.show_level" value="20"} selected=""{/eq}>20级</option>
+            <option value="30" {eq name="$info.show_level" value="30"} selected=""{/eq}>30级</option>
+            <option value="40" {eq name="$info.show_level" value="40"} selected=""{/eq}>40级</option>
+            <option value="50" {eq name="$info.show_level" value="50"} selected=""{/eq}>50级</option>
+
+          </select>
+        </div>
+        <div class="layui-form-mid layui-word-aux">显示上级推荐人好友</div>
+        <div class="layui-input-inline">
+          <select name="show_prev" lay-filter="demo">
+            
+            <option value="1" {eq name="$info.show_prev" value="1"} selected=""{/eq}>向上一级</option>
+            <option value="2" {eq name="$info.show_prev" value="2"} selected=""{/eq}>向上二级</option>
+            <option value="3" {eq name="$info.show_prev" value="3"} selected=""{/eq}>向上三级</option>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">每天每只动物最高被偷取操作次数为</div>
+        <div class="layui-input-inline">
+          <input name="steal_height" autocomplete="off" class="layui-input" type="text" value="{$info.steal_height}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">次</div>
+      </div>
+
+      <blockquote class="layui-elem-quote">关闭系统参数</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">当前系统状态</div>
+        <div class="layui-input-inline">
+          <select name="status" lay-filter="demo">
+            
+            <option value="1" {eq name="$info.status" value="1"} selected=""{/eq}>开启</option>
+            <option value="0" {eq name="$info.status" value="0"} selected=""{/eq}>关闭</option>
+
+          </select>
+        </div>
+
+      </div>
+      
+      <input type="hidden" value="{$info.id}" name="id">
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">关闭系统提示</div>
+        <div class="layui-input-inline" style="width: 500px;">
+          <input name="closs_tips" autocomplete="off" class="layui-input" type="text" value="{$info.closs_tips}">
+        </div>
+      </div>
+
+
+
+      <br>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">确认保存</button>
+        </div>
+      </div>
+        
+    </form>
+    {include file="public/foot"}
+    
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/system/sys')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+    </script>
+    <script>
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      laydate.render({ 
+        elem: '#regist_start'
+        ,type: 'time'
+      });
+      laydate.render({ 
+        elem: '#regist_end'
+        ,type: 'time'
+      });
+    });
+    </script>
+  </div>
+</body>
+</html>

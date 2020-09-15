@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <form class="layui-form" id="admin">
+
+      <blockquote class="layui-elem-quote">转让产量参数</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">转让功能</div>
+        <div class="layui-input-inline">
+          <select name="transfer_status" lay-filter="demo">
+            
+            <option value="1" {eq name="$info.transfer_status" value="1"} selected=""{/eq}>开启</option>
+            <option value="0" {eq name="$info.transfer_status" value="0"} selected=""{/eq}>关闭</option>
+
+          </select>
+        </div>
+
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">手续费功能</div>
+        <div class="layui-input-inline">
+          <select name="charge_status" lay-filter="demo">
+            
+            <option value="1" {eq name="$info.charge_status" value="1"} selected=""{/eq}>开启</option>
+            <option value="0" {eq name="$info.charge_status" value="0"} selected=""{/eq}>关闭</option>
+
+          </select>
+        </div>
+
+        <div class="layui-form-mid layui-word-aux"><span style="color: red;">*注：手续费设置的参数在</span><span style="color: blue;">[会员管理]-[会员级别]-[转让手续费]</span></div>
+      </div>
+
+      <blockquote class="layui-elem-quote">转让参数设置</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">单次最低转让产量</div>
+        <div class="layui-input-inline">
+          <input name="one_line" autocomplete="off" class="layui-input" type="text" value="{$info.one_line}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">单次最高转让产量</div>
+        <div class="layui-input-inline">
+          <input name="one_hight" autocomplete="off" class="layui-input" type="text" value="{$info.one_hight}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">每日累计最高转让产量</div>
+        <div class="layui-input-inline">
+          <input name="day_total" autocomplete="off" class="layui-input" type="text" value="{$info.day_total}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">每日累计转让次数限制</div>
+        <div class="layui-input-inline">
+          <input name="day_num" autocomplete="off" class="layui-input" type="text" value="{$info.day_num}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">次</div>
+      </div>
+
+      <input type="hidden" name="id" value="{$info.id}">
+      <br>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">确认保存</button>
+        </div>
+      </div>
+        
+    </form>
+    {include file="public/foot"}
+    
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/system/transfer')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+    </script>
+  </div>
+</body>
+</html>

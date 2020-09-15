@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+
+    <form class="layui-form" id="admin">
+
+      <blockquote class="layui-elem-quote">图片参数</blockquote>
+      
+      <div class="layui-upload" id="start-thumb-start">
+        <div class="layui-form-mid layui-word-aux">APP启动背景图片</div>
+        <button type="button" class="layui-btn" id="thumb-start">上传图片</button>
+        <div class="layui-upload-list">
+          <label class="layui-form-label"></label>
+          <img class="layui-upload-img" id="demo1-start" width="150" height="150" {notempty name="$info.start_up"}src="{$info.start_up}"{/notempty}><input type="hidden" name="start_up" value="{$info.start_up}">
+          <p id="demoText-start"></p>
+        </div>
+      </div>
+
+      <div class="layui-upload" id="upload-thumb">
+        <div class="layui-form-mid layui-word-aux">默认会员头像</div>
+        <button type="button" class="layui-btn" id="thumb">上传图片</button>
+        <div class="layui-upload-list">
+          <label class="layui-form-label"></label>
+          <img class="layui-upload-img" id="demo1" width="150" height="150" {notempty name="$info.thumb"}src="{$info.thumb}"{/notempty}><input type="hidden" name="thumb" value="{$info.thumb}">
+          <p id="demoText"></p>
+        </div>
+      </div>
+
+      <blockquote class="layui-elem-quote">会员注册参数</blockquote>
+
+      <div class="layui-upload" id="upload-thumb1">
+        <div class="layui-form-mid layui-word-aux">背景音乐</div>
+        <button type="button" class="layui-btn layui-btn-primary" id="slide-pc1">上传文件</button>
+        <div class="layui-upload-list">
+          <!-- <label class="layui-form-label"></label> -->
+          <input type="hidden" name="background_music" value="{$info.background_music}">
+          <audio controls>
+            <source src="{$info.background_music}" type="audio/mpeg">
+            Your browser does not support this audio format.
+          </audio>
+          <p id="demoText1"></p>
+        </div>
+      </div>
+
+      <div class="layui-upload" id="upload-thumb2">
+        <div class="layui-form-mid layui-word-aux">背景音效</div>
+        <button type="button" class="layui-btn layui-btn-primary" id="slide-pc2">上传文件</button>
+        <div class="layui-upload-list">
+          <!-- <label class="layui-form-label"></label> -->
+          <input type="hidden" name="background_sound" value="{$info.background_sound}">
+          <audio controls>
+            <source src="{$info.background_sound}" type="audio/mpeg">
+            Your browser does not support this audio format.
+          </audio>
+          <p id="demoText2"></p>
+        </div>
+      </div>
+
+
+      <div class="layui-upload" id="upload-thumb3">
+        <div class="layui-form-mid layui-word-aux">养殖音效</div>
+        <button type="button" class="layui-btn layui-btn-primary" id="slide-pc3">上传文件</button>
+        <div class="layui-upload-list">
+          <!-- <label class="layui-form-label"></label> -->
+          <input type="hidden" name="feed_sound" value="{$info.feed_sound}">
+          <audio controls>
+            <source src="{$info.feed_sound}" type="audio/mpeg">
+            Your browser does not support this audio format.
+          </audio>
+          <p id="demoText3"></p>
+        </div>
+      </div>
+
+      <div class="layui-upload" id="upload-thumb4">
+        <div class="layui-form-mid layui-word-aux">收获音效</div>
+        <button type="button" class="layui-btn layui-btn-primary" id="slide-pc4">上传文件</button>
+        <div class="layui-upload-list">
+          <!-- <label class="layui-form-label"></label> -->
+          <input type="hidden" name="harvest_sound" value="{$info.harvest_sound}">
+          <audio controls>
+            <source src="{$info.harvest_sound}" type="audio/mpeg">
+            Your browser does not support this audio format.
+          </audio>
+          <p id="demoText6"></p>
+        </div>
+      </div>
+
+      <div class="layui-upload" id="upload-thumb5">
+        <div class="layui-form-mid layui-word-aux">偷取声音</div>
+        <button type="button" class="layui-btn layui-btn-primary" id="slide-pc5">上传文件</button>
+        <div class="layui-upload-list">
+          <!-- <label class="layui-form-label"></label> -->
+          <input type="hidden" name="steal_sound" value="{$info.steal_sound}">
+          <audio controls>
+            <source src="{$info.steal_sound}" type="audio/mpeg">
+            Your browser does not support this audio format.
+          </audio>
+          <p id="demoText4"></p>
+        </div>
+      </div>
+
+      <div class="layui-upload" id="upload-thumb6">
+        <div class="layui-form-mid layui-word-aux">看门狗声音</div>
+        <button type="button" class="layui-btn layui-btn-primary" id="slide-pc6">上传文件</button>
+        <div class="layui-upload-list">
+          <!-- <label class="layui-form-label"></label> -->
+          <input type="hidden" name="dog_sound" value="{$info.dog_sound}">
+          <audio controls>
+            <source src="{$info.dog_sound}" type="audio/mpeg">
+            Your browser does not support this audio format.
+          </audio>
+          <p id="demoText5"></p>
+        </div>
+      </div>
+
+        <pre style="color: red;">
+*注: 背景声音：进入APP自动播放，默认为 <span style="color: blue;">单曲循环播放</span>，可在APP自由开启与关闭！
+背景音效：进入APP自动播放，默认为<span style="color: blue;">单曲循环播放</span>，可在APP自由开启与关闭！
+养殖声音：每次从仓库养殖到牧场，播放一次声音！
+收获声音：收获自己的产量到仓库，播放一次声音！
+偷取声音：偷取好友牧场的产量到自己的仓库，播放一次声音！(如果使用一键偷取只播放一次声音，毕竟偷取的动物非常多)
+看门狗声音：如果牧场有使用看门狗，不论自己的牧场还是好友的牧场，每次进入牧场必须播放一次声音，
+        </pre>
+
+      <div class="layui-form-item">
+        <div class="layui-input-inline">
+          <button class="layui-btn" lay-submit lay-filter="admin">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+      
+    </form>
+
+
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script>
+<script>
+         layui.use('upload', function(){
+         var $ = layui.jquery;
+         var upload = layui.upload;            
+ upload.render({
+     elem: '#slide-pc1',
+     url: '{:url('admin/common/upload')}',
+     size: 50000000,
+     exts: 'jpg|png|jpeg|xlsx|mp3|mp4',
+     multiple: true,
+     before: function(obj) {
+         layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
+     },
+     done: function(res) {
+        layer.close(layer.msg());//关闭上传提示窗口
+         if(res.status == 0) {
+             return layer.msg(res.message);
+         }
+         console.log(res);
+         $('#upload-thumb1').append('<input type="hidden" name="background_music" value="'+ res.src +'">');
+         $('#upload-thumb1').children("source").attr('src',res.src);
+     }
+ });
+});
+</script><script>
+         layui.use('upload', function(){
+         var $ = layui.jquery;
+         var upload = layui.upload;            
+ upload.render({
+     elem: '#slide-pc2',
+     url: '{:url('admin/common/upload')}',
+     size: 50000000,
+     exts: 'jpg|png|jpeg|xlsx|mp3|mp4',
+     multiple: true,
+     before: function(obj) {
+         layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
+     },
+     done: function(res) {
+        layer.close(layer.msg());//关闭上传提示窗口
+         if(res.status == 0) {
+             return layer.msg(res.message);
+         }
+         console.log(res);
+         $('#upload-thumb2').append('<input type="hidden" name="background_sound" value="'+ res.src +'">');
+         $('#upload-thumb2').children("source").attr('src',res.src);
+     }
+ });
+});
+</script><script>
+         layui.use('upload', function(){
+         var $ = layui.jquery;
+         var upload = layui.upload;            
+ upload.render({
+     elem: '#slide-pc3',
+     url: '{:url('admin/common/upload')}',
+     size: 50000000,
+     exts: 'jpg|png|jpeg|xlsx|mp3|mp4',
+     multiple: true,
+     before: function(obj) {
+         layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
+     },
+     done: function(res) {
+        layer.close(layer.msg());//关闭上传提示窗口
+         if(res.status == 0) {
+             return layer.msg(res.message);
+         }
+         console.log(res);
+         $('#upload-thumb3').append('<input type="hidden" name="feed_sound" value="'+ res.src +'">');
+         $('#upload-thumb3').children("source").attr('src',res.src);
+     }
+ });
+});
+</script><script>
+         layui.use('upload', function(){
+         var $ = layui.jquery;
+         var upload = layui.upload;            
+ upload.render({
+     elem: '#slide-pc4',
+     url: '{:url('admin/common/upload')}',
+     size: 50000000,
+     exts: 'jpg|png|jpeg|xlsx|mp3|mp4',
+     multiple: true,
+     before: function(obj) {
+         layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
+     },
+     done: function(res) {
+        layer.close(layer.msg());//关闭上传提示窗口
+         if(res.status == 0) {
+             return layer.msg(res.message);
+         }
+         console.log(res);
+         $('#upload-thumb4').append('<input type="hidden" name="harvest_sound" value="'+ res.src +'">');
+         $('#upload-thumb4').children("source").attr('src',res.src);
+     }
+ });
+});
+</script><script>
+         layui.use('upload', function(){
+         var $ = layui.jquery;
+         var upload = layui.upload;            
+ upload.render({
+     elem: '#slide-pc5',
+     url: '{:url('admin/common/upload')}',
+     size: 50000000,
+     exts: 'jpg|png|jpeg|xlsx|mp3|mp4',
+     multiple: true,
+     before: function(obj) {
+         layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
+     },
+     done: function(res) {
+        layer.close(layer.msg());//关闭上传提示窗口
+         if(res.status == 0) {
+             return layer.msg(res.message);
+         }
+         console.log(res);
+         $('#upload-thumb5').append('<input type="hidden" name="steal_sound" value="'+ res.src +'">');
+         $('#upload-thumb5').children("source").attr('src',res.src);
+     }
+ });
+});
+</script><script>
+         layui.use('upload', function(){
+         var $ = layui.jquery;
+         var upload = layui.upload;            
+ upload.render({
+     elem: '#slide-pc6',
+     url: '{:url('admin/common/upload')}',
+     size: 50000000,
+     exts: 'jpg|png|jpeg|xlsx|mp3|mp4',
+     multiple: true,
+     before: function(obj) {
+         layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
+     },
+     done: function(res) {
+        layer.close(layer.msg());//关闭上传提示窗口
+         if(res.status == 0) {
+             return layer.msg(res.message);
+         }
+         console.log(res);
+         $('#upload-thumb6').append('<input type="hidden" name="dog_sound" value="'+ res.src +'">');
+         $('#upload-thumb6').children("source").attr('src',res.src);
+     }
+ });
+});
+</script>
+    <script>
+    layui.use('upload', function(){
+      var upload = layui.upload;
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#thumb-start' //绑定元素
+        ,url: "{:url('common/upload')}" //上传接口
+        ,done: function(res){
+          //上传完毕回调
+          if(res.code == 2) {
+            $('#demo1-start').attr('src',res.src);
+            $('#start-thumb-start').append('<input type="hidden" name="start_up" value="'+ res.src +'">');
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+        ,error: function(){
+          //请求异常回调
+          //演示失败状态，并实现重传
+          var demoText = $('#demoText-start');
+          demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+          demoText.find('.demo-reload').on('click', function(){
+            uploadInst.upload();
+          });
+        }
+      });
+    });
+    </script>
+    <script>
+    layui.use('upload', function(){
+      var upload = layui.upload;
+      //执行实例
+      var uploadInst = upload.render({
+        elem: '#thumb' //绑定元素
+        ,url: "{:url('common/upload')}" //上传接口
+        ,done: function(res){
+          //上传完毕回调
+          if(res.code == 2) {
+            $('#demo1').attr('src',res.src);
+            $('#upload-thumb').append('<input type="hidden" name="thumb" value="'+ res.src +'">');
+          } else {
+            layer.msg(res.msg);
+          }
+        }
+        ,error: function(){
+          //请求异常回调
+          //演示失败状态，并实现重传
+          var demoText = $('#demoText');
+          demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+          demoText.find('.demo-reload').on('click', function(){
+            uploadInst.upload();
+          });
+        }
+      });
+    });
+    </script>
+
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/app/app')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+    </script>
+
+  </div>
+</body>
+</html>

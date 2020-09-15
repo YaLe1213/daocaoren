@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px; width: 1400px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">卷码管理</li>
+        <li><a href="{:url('admin/coupon/publish')}" class="a_menu">新增卷码</a></li>
+      </ul>
+    </div> 
+   
+    <table class="layui-table" lay-size="sm">
+      <colgroup>
+        <col width="30">  
+        <col width="80">
+        <col width="80">
+        <col width="80">
+        <col width="150">
+        <col width="200">
+        <col width="50">
+        <col width="150">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>卷码分类</th>
+          <th>卷码名称</th>
+          <th>使用商店</th>
+          <th>抵扣产量</th>
+          <th>功能说明</th>
+          <th>静态图标</th>
+          <th>操作</th>
+        </tr> 
+      </thead>
+      <tbody>
+        {volist name="list" id="vo"}
+        <tr>
+          <td>{$vo.id}</td>
+          <td>代金券</td>
+          <td>{$vo.name}</td>
+          <td>{$vo.use_shop}</td>
+          <td>{$vo.deduct_yield}个</td>
+          <td>动物商店购使用产量购买动物抵扣{$vo.deduct_yield}产量</td>
+          <td><a href="{$vo.thumb}" class="tooltip"><img src="{$vo.thumb}" width="20" height="20"></a></td>
+          <td class="operation-menu">
+            <div class="layui-btn-group">
+              <a href="{:url('admin/coupon/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs" lay-event="edit" id="{$vo.id}" data-type="test5">编辑</a>
+              <a class="layui-btn layui-btn-danger layui-btn-xs delete" lay-event="del" id="{$vo.id}" data-name="{$vo.name}">删除</a>
+            </div>
+          </td>
+        </tr>
+        {/volist}
+      </tbody>
+    </table>
+    <div style="padding:0 20px;">{$list->render()}</div>
+
+    {include file="public/foot"}
+    
+
+    <script type="text/javascript">
+
+    $('.delete').click(function(){
+      var id = $(this).attr('id');
+      var name = $(this).attr("data-name");
+      layer.confirm('确定要删除此卷码-['+name+']吗?', function(index) {
+        $.ajax({
+          url:"{:url('admin/coupon/delete')}",
+          data:{id:id},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+      })
+    })
+    </script>
+
+    <script type="text/javascript">
+    layui.use('layer', function(){
+      var layer = layui.layer;
+
+      $('.preview').click(function(){
+        var url = $(this).attr('href');
+        layer.open({
+          type:2,
+          title:'编辑',
+          content:url,
+          area: ['550px', '400px']
+        });
+        return false;
+      })
+    });
+    </script>
+  </div>
+</body>
+</html>

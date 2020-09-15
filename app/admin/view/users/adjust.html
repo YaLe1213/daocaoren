@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="wphonetphoneidth, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+</head>
+<body style="padding:10px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li><a href="{:url('admin/users/index')}" class="a_menu">会员管理</a></li>
+        <li class="layui-this">调整</li>
+      </ul>
+    </div>
+    <div style="margin-top: 20px;">
+    </div>
+    <form class="layui-form" id="admin">
+      <div class="layui-form-item">
+        <label class="layui-form-label">养殖中的动物</label>
+        <div class="layui-input-block" style="max-width: 850px;">
+          <input name="real_name" autocomplete="off" class="layui-input" type="text" disabled="" {notempty name="$info.feeding"} value="{volist name='$info.feeding' id='vo'}{$vo.level} : {$vo.name} ({$vo.method})x{$vo.num} {/volist}" {/notempty}>
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">仓库中的动物</label>
+        <div class="layui-input-block" style="max-width: 850px;">
+          <input name="idcard"  autocomplete="off" class="layui-input" type="text" disabled="" {notempty name="$info.warehouse"} value="{volist name='$info.warehouse' id='vo'}{$vo.level} : {$vo.name} ({$vo.method})x{$vo.num} {/volist}" {/notempty}>
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">棚圈总数</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.shed_num}" autocomplete="off" class="layui-input shed_num" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <label class="layui-form-label">共识度</label>
+        <div class="layui-input-inline">
+          <input name="idcard"  autocomplete="off" class="layui-input consensus" type="text" disabled="" value="{$info.consensus}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <label class="layui-form-label">信誉分</label>
+        <div class="layui-input-inline">
+          <input name="idcard"  autocomplete="off" class="layui-input credit" type="text" disabled="" value="{$info.credit}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">分</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">产量</label>
+        <div class="layui-input-inline">
+          <input name="idcard"  autocomplete="off" class="layui-input yield" type="text" disabled="" value="{$info.yield}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <label class="layui-form-label">可用HOS</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.use_hos}" autocomplete="off" class="layui-input use_hos" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <label class="layui-form-label">冻结HOS</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.frozen_hos}" autocomplete="off" class="layui-input frozen_hos" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">饲料</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.feed}" autocomplete="off" class="layui-input feed" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">袋</div>
+        <label class="layui-form-label">一键偷取</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.onekey_steal}" autocomplete="off" class="layui-input onekey_steal" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <label class="layui-form-label">看门狗</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.dogs}" autocomplete="off" class="layui-input dogs" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">只</div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">代金券50产量</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.coupon_50}" autocomplete="off" class="layui-input coupon_50" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">张</div>
+        <label class="layui-form-label">代金券200产量</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.coupon_200}" autocomplete="off" class="layui-input coupon_200" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">张</div>
+        <label class="layui-form-label">代金券600产量</label>
+        <div class="layui-input-inline">
+          <input name="idcard" value="{$info.coupon_600}" autocomplete="off" class="layui-input coupon_600" type="text" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">张</div>
+      </div>
+      
+      <hr class="layui-bg-black">
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">调整项目</label>
+        <div class="layui-input-inline">
+          <select name="upgrade_give[]" lay-filter="demo" class="object">
+            <option value="">请选择</option>
+            <option value="consensus">共识度</option>
+            <option value="yield">产量</option>
+            <option value="use_hos">可用HOS</option>
+            <option value="credit">信誉分</option>
+            <option value="coupon_50">代金券50产量</option>
+            <option value="coupon_200">代金券200产量</option>
+            <option value="coupon_600">代金券600产量</option>
+          </select>
+        </div>
+
+        <label class="layui-form-label">调整操作</label>
+        <div class="layui-input-inline">
+          <select lay-filter="demo"  class="operation">
+            <option value="1" data-name="">增加</option>
+            <option value="0" data-name="">减少</option>
+          </select>
+        </div>
+
+        <label class="layui-form-label">调整数量</label>
+        <div class="layui-input-inline">
+          <input name="idcard"  lay-verify="required" autocomplete="off" class="layui-input num" type="text">
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">最终结果</label>
+        <div class="layui-input-inline">
+          <input name="idcard"  lay-verify="required" autocomplete="off" class="layui-input output" type="text">
+        </div>
+      </div>
+
+
+      {notempty name="$id"}
+      <input type="hidden" name="id" value="{$id}" class="id">
+      {/notempty}
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+      
+    </form>
+
+
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <script src="__PUBLIC__/jquery/jquery.min.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: '__JS__/',
+            version: '1.0.1'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script>
+    <script>
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      laydate.render({ 
+        elem: '#operation_limit_duration'
+        ,type: 'date'
+      });
+      laydate.render({ 
+        elem: '#login_limit_duration'
+        ,type: 'date'
+      });
+    });
+    </script>
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                var id = $('.id').val();
+                var ob = $(".object").val();
+                var num = $(".output").val();
+                console.log("id:"+id+"ob:"+ob+"num:"+num);
+                  $.ajax({
+                      url:"{:url('admin/users/adjust')}",
+                      data:{id:id,ob:ob,num:num},
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.reload();
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+      });
+    </script>
+    <script>
+    layui.use(['layer', 'jquery', 'form'], function () {
+      var layer = layui.layer,
+              $ = layui.jquery;
+            form = layui.form;
+
+      form.on('select(demo)', function(data){
+        console.log(data);
+        var object = $(".object").val();
+        var operation = $(".operation").val();
+        console.log("ob----"+object+"op---"+operation);
+        // if (data.value == '' || data.value == 0) {
+        //   $(".give_name").val("");
+        // } else {
+        //   $.ajax({
+        //     url:"{:url('admin/userslevel/getname')}",
+        //     data:{id:data.value},
+        //     type:'post',
+        //     success:function(res) {
+        //         $(".give_name").val(res);
+        //     }
+        //   })
+        // }
+      });
+    });
+    // $(".num").on("change",function(){
+    //   console.log($(this).val());
+    // });
+    $(document).keyup(function(event){
+      var num = parseFloat($('.num').val() == ''?0:$('.num').val());
+
+      console.log("Key: "+event.keyCode);
+      var object = $(".object").val();
+      var operation = $(".operation").val();
+      console.log("ob----"+object+"op---"+operation+"num---"+num);
+      var ob = parseFloat($("."+object).val());
+      if (operation == 1) {
+        var j = ob + num;
+        if (j==NaN) {$(".output").val(0);} else {$(".output").val(j);}
+        console.log(j);
+      } else {
+        var j = ob - num;
+        if (object != 'yield' && object != 'credit' && object != 'use_hos') {
+          if (j <= 0) {
+            $(".output").val(0);
+          } else {
+            $(".output").val(j);
+          }
+        } else {
+          console.log("<<<<<<<<<<");console.log(j);
+          $(".output").val(j);
+        }
+
+      }
+      console.log(ob);
+    });
+    </script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px; width: 2000px;">
+  <div class="tplay-body-div">
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">会员管理</li>
+        <li><a href="{:url('admin/users/publish')}" class="a_menu">新增会员</a></li>
+      </ul>
+    </div> 
+   
+    <table class="layui-table" lay-size="sm">
+      <colgroup>
+        <col width="50">
+        <col width="80">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>头像</th>
+          <th>昵称</th>
+          <th>注册手机号</th>
+          <th>实名姓名</th>
+          <th>会员等级</th>
+          <th>会员级别</th>
+          <th>共识度</th>
+          <th>产量</th>
+          <th>可用HOS</th>
+          <th>冻结HOS</th>
+          <th>信誉分</th>
+          <th>支付宝</th>
+          <th>银行卡</th>
+          <th>推荐人</th>
+          <th>推荐人手机号</th>
+          <th>注册时间</th>
+          <th>注册IP</th>
+          <th>操作</th>
+          <th>登录</th>
+          <th>操作</th>
+        </tr> 
+      </thead>
+      <tbody>
+        {volist name="list" id="vo"}
+        <tr>
+          <td>{$vo.id}</td>
+          <td><a href="{$vo.thumb}" class="tooltip"><img src="{$vo.thumb}" width="20" height="20"></a></td>
+          <td>{$vo.nickname}</td>
+          <td>{$vo.phone}</td>
+          <td>{$vo.realidcard.real_name}</td>
+          <td>{$vo.usersgrade.name}</td>
+          <td>{$vo.userslevel.name}</td>
+          <td>{$vo.consensus}</td>
+          <td>{$vo.yield}</td>
+          <td>{$vo.use_hos}</td>
+          <td>{$vo.frozen_hos}</td>
+          <td>{$vo.credit}</td>
+          <td>{$vo.realalipay}</td>
+          <td>{$vo.realbank}</td>
+          <td>{$vo.recommend_name}</td>
+          <td>{$vo.recommend_phone}</td>
+          <td>{$vo.create_time}</td>
+          <td>{$vo.register_ip}</td>
+          <td>{$vo.operation_limit}</td>
+          <td>{$vo.login_limit}</td>
+          <td class="operation-menu">
+            <div class="layui-btn-group">
+              <a href="{:url('admin/users/publish',['id'=>$vo.id])}" class="layui-btn layui-btn-xs"><i class="layui-icon">修改</i></a>
+              <a href="{:url('admin/users/relationship',['id'=>$vo.id])}" class="layui-btn layui-btn-xs layui-btn-normal a_menu layui-btn-primary"><i class="layui-icon">关系</i></a>
+              <a href="{:url('admin/users/adjust',['id'=>$vo.id])}" class="layui-btn layui-btn-danger layui-btn-xs"><i class="layui-icon">调整</i></a>
+              <a href="{:url('admin/users/realidcard',['id'=>$vo.id])}" class="layui-btn layui-btn-xs layui-btn-primary layui-btn-warm"><i class="layui-icon">实名</i></a>
+              <a href="{:url('admin/users/realpay',['id'=>$vo.id])}" class="layui-btn layui-btn-xs layui-btn-primary layui-btn-danger"><i class="layui-icon">收款</i></a>
+            </div>
+          </td>
+        </tr>
+        {/volist}
+      </tbody>
+    </table>
+    <div style="padding:0 20px;">{$list->render()}</div>
+
+    {include file="public/foot"}
+    
+ <!--    <script type="text/javascript">
+
+    $('.delete').click(function(){
+      var id = $(this).attr('id');
+      layer.confirm('确定要删除?', function(index) {
+        $.ajax({
+          url:"{:url('admin/admin/delete')}",
+          data:{id:id},
+          success:function(res) {
+            layer.msg(res.msg);
+            if(res.code == 1) {
+              setTimeout(function(){
+                location.href = res.url;
+              },1500)
+            }
+          }
+        })
+      })
+    })
+    </script> -->
+  </div>
+</body>
+</html>

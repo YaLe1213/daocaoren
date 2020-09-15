@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="__PUBLIC__/font-awesome/css/font-awesome.min.css" media="all" />
+  <link rel="stylesheet" href="__CSS__/admin.css"  media="all">
+  <style type="text/css">
+
+/* tooltip */
+#tooltip{
+  position:absolute;
+  border:1px solid #ccc;
+  background:#333;
+  padding:2px;
+  display:none;
+  color:#fff;
+}
+</style>
+</head>
+<body style="padding:10px;width: 1800px;">
+  <div class="tplay-body-div">
+    <form class="layui-form" id="admin">
+
+      <blockquote class="layui-elem-quote">注册将——注册会员奖励</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">注册成为认证会员奖励动物</div>
+        <div class="layui-input-inline">
+          <select name="regist_user_reward" lay-filter="demo">
+            
+            <option value="1" {eq name="$info.regist_user_reward" value="1"} selected=""{/eq}>开启</option>
+            <option value="0" {eq name="$info.regist_user_reward" value="0"} selected=""{/eq}>关闭</option>
+
+          </select>
+        </div>
+        <div class="layui-form-mid layui-word-aux">奖励动物</div>
+        <div class="layui-input-inline">
+          <select name="zoon_id" lay-filter="zoon">
+            {volist name="zoon" id="vo"}
+            <option value="{$vo.id}" {eq name="$info.zoon_id" value="$vo.id"} selected=""{/eq}>{$vo.zoonlevel}级</option>
+            {/volist}
+          </select>
+        </div>
+
+        <div class="layui-input-inline">
+          <input name="zoon_name" autocomplete="off" class="layui-input zoon_name" type="text" value="{$info.zoon_name}" placeholder="自动显示动物名称" disabled="">
+        </div>
+        <div class="layui-form-mid layui-word-aux">奖励数量</div>
+        <div class="layui-input-inline">
+          <input name="zoon_num" autocomplete="off" class="layui-input" type="text" value="{$info.zoon_num}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">只</div>
+      </div>
+
+      <blockquote class="layui-elem-quote">直推奖——直推会员奖励</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">直推认证会员奖励推荐人共识度</div>
+        <div class="layui-input-inline">
+          <input name="zhi_hos" autocomplete="off" class="layui-input" type="text" value="{$info.zhi_hos}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <div class="layui-form-mid" style="color: red;">注：奖励共识度必须是养殖系统赠送的动物，如果没有养殖则不发放奖励！</div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">直推认证会员奖励推荐人产量</div>
+        <div class="layui-input-inline">
+          <input name="zhi_yield" autocomplete="off" class="layui-input" type="text" value="{$info.zhi_yield}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <div class="layui-form-mid layui-word-aux">奖励分多次发放，分天发放为</div>
+        <div class="layui-input-inline">
+          <input name="yield_day" autocomplete="off" class="layui-input" type="text" value="{$info.yield_day}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">天</div>
+        <div class="layui-form-mid layui-word-aux">每天奖励</div>
+        <div class="layui-input-inline">
+          <input name="yield_day_num" autocomplete="off" class="layui-input" type="text" value="{$info.yield_day_num}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <div class="layui-form-mid layui-word-aux">所推荐的认证会员是否每天必须坚持喂养才给奖励</div>
+        <div class="layui-input-inline">
+          <select name="must_series_feed" lay-filter="demo">
+            
+            <option value="1" {eq name="$info.must_series_feed" value="1"} selected=""{/eq}>必须满足</option>
+            <option value="0" {eq name="$info.must_series_feed" value="0"} selected=""{/eq}>无需满足</option>
+
+          </select>
+        </div>
+        <div class="layui-form-mid" style="color: red;">*注:所推荐的认证会员是否每天必须喂养才给奖励，如果选择的是 <span style="color: blue;">[必须满足]</span>指的是所推荐的认证会员每天至少喂养一次赠送的动物，并且所设置的发放天数途中某一天存在断开没有喂养，则后续的喂养不给予奖励！</div>
+      </div>
+
+
+      <blockquote class="layui-elem-quote">领导奖——被推荐的上级认证会员奖励</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">新注册认证会员都要奖励所有上级被推荐人共识度</div>
+        <div class="layui-input-inline">
+          <input name="regist_prev_consensus" autocomplete="off" class="layui-input" type="text" value="{$info.regist_prev_consensus}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">个</div>
+        <div class="layui-form-mid layui-word-aux">上级推荐人层级限制</div>
+        <div class="layui-input-inline">
+          <select name="prev_limit" lay-filter="demo">
+            
+            <option value="0" {eq name="$info.prev_limit" value="0"} selected=""{/eq}>不限制</option>
+            <option value="10" {eq name="$info.prev_limit" value="10"} selected=""{/eq}>10级</option>
+            <option value="20" {eq name="$info.prev_limit" value="20"} selected=""{/eq}>20级</option>
+            <option value="30" {eq name="$info.prev_limit" value="30"} selected=""{/eq}>30级</option>
+
+          </select>
+        </div>
+      </div>
+
+      <blockquote class="layui-elem-quote">养养殖将——下级购买动物奖励</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">直推认证会员购买动物-所购买动物所需产量的</div>
+        <div class="layui-input-inline">
+          <input name="zhi_buy_yield" autocomplete="off" class="layui-input" type="text" value="{$info.zhi_buy_yield}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+        <div class="layui-form-mid layui-word-aux">作为奖励上级推荐人的产量 <span style="color: red;">注：奖励产量必须是直推会员必须购买养殖后自动给予奖励，只购买没有养殖则不发放奖励！</span></div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">如果下级会员农场中的动物级别大于当前自己农场中的动物级别，此时按照当前自己农场中最高动物等级养殖所需的产量给予奖励</div>
+        <div class="layui-input-inline">
+          <input name="feed_zoon_reward" autocomplete="off" class="layui-input" type="text" value="{$info.feed_zoon_reward}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+        <div class="layui-form-mid layui-word-aux">上级推荐人 <span style="color: red;">注：奖励产量必须是动物购买养殖后自动给予奖励，只购买没有养殖则不发放奖励！</span></div>
+      </div>
+
+      <blockquote class="layui-elem-quote">互动奖——偷取伞下所有认证会员奖励</blockquote>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">偷取鸡蛋条件</div>
+        <div class="layui-input-inline">
+          <select name="steal_egg" lay-filter="demo">
+            
+            <option value="1" {eq name="$info.steal_egg" value="1"} selected=""{/eq}>当前养殖数量大于等于被偷好友</option>
+            <option value="0" {eq name="$info.steal_egg" value="0"} selected=""{/eq}>不限制</option>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-form-mid layui-word-aux">偷取养殖周期内的产量数量为当前被偷动物日产量的</div>
+        <div class="layui-input-inline">
+          <input name="zoon_day_yield1" autocomplete="off" class="layui-input" type="text" value="{$info.zoon_day_yield1}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+        <div class="layui-form-mid layui-word-aux">如果被偷的动物等级大于当前自己养殖的动物级别，此时数量为被偷动物日产量的</div>
+        <div class="layui-input-inline">
+          <input name="zoon_day_yield2" autocomplete="off" class="layui-input" type="text" value="{$info.zoon_day_yield2}">
+        </div>
+        <div class="layui-form-mid layui-word-aux">%</div>
+      </div>
+
+      <input type="hidden" name="id" value="{$info.id}">
+      <br>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="admin">确认保存</button>
+        </div>
+      </div>
+        
+    </form>
+    {include file="public/foot"}
+    
+    <script>
+      layui.use(['layer', 'form'], function() {
+          var layer = layui.layer,
+              $ = layui.jquery,
+              form = layui.form;
+          $(window).on('load', function() {
+              form.on('submit(admin)', function(data) {
+                  $.ajax({
+                      url:"{:url('admin/system/zhihuan')}",
+                      data:$('#admin').serialize(),
+                      type:'post',
+                      async: false,
+                      success:function(res) {
+                          if(res.code == 1) {
+                              layer.alert(res.msg, function(index){
+                                location.href = res.url;
+                              })
+                          } else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  })
+                  return false;
+              });
+          });
+          form.on('select(zoon)', function(data){
+            console.log(data.value);
+              $.ajax({
+                  url:"{:url('admin/system/getzoon')}",
+                  data:{id:data.value},
+                  type:'post',
+                  async: false,
+                  success:function(res) {
+                     console.log(res);
+                     $(".zoon_name").val(res);
+                  }
+              })
+          });
+      });
+    </script>
+    <script>
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      laydate.render({ 
+        elem: '#fh_time'
+        ,type: 'time'
+      });
+    });
+    </script>
+  </div>
+</body>
+</html>
